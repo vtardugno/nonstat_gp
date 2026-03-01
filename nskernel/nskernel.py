@@ -52,8 +52,8 @@ class NonStationaryKernel(term.Kernel):
 
   def _grad_param(self, grad_dU=None, grad_dV=None):
 
-    # if grad_dU is not None or grad_dV is not None:
-    #   raise NotImplementedError()
+    if grad_dU is not None or grad_dV is not None:
+      raise NotImplementedError()
     
 
     grad_alpha = (
@@ -62,10 +62,10 @@ class NonStationaryKernel(term.Kernel):
       + self._cov._grad_V[:, self._offset]
     )
 
-    if grad_dU is not None:
-      grad_alpha += grad_dU[:, self._offset]
-    if grad_dV is not None:
-      grad_alpha += grad_dV[:, self._offset]
+    # if grad_dU is not None:
+    #   grad_alpha += grad_dU[:, self._offset]
+    # if grad_dV is not None:
+    #   grad_alpha += grad_dV[:, self._offset]
 
     return {
       key: grad_alpha @ dalpha_dpk
